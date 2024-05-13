@@ -2,6 +2,8 @@ package set;
 
 import collections_framework.array_list.Car;
 
+import java.util.Iterator;
+
 public class CarSetList implements CarSet {
     private static final int INITIAL_CAPACITY = 16;
     private static double LOAD_FACTOR = 0.75;
@@ -80,15 +82,15 @@ public class CarSetList implements CarSet {
     @Override
     public boolean contains(Car car) {
         int position = findPosition(car, array.length);
-        if(array[position] == null){
+        if (array[position] == null) {
             return false;
-        }else{
-            if(array[position].value.equals(car)){
+        } else {
+            if (array[position].value.equals(car)) {
                 return true;
             }
             Entry current = array[position].next;
-            while (current != null){
-                if(current.value.equals(car)){
+            while (current != null) {
+                if (current.value.equals(car)) {
                     return true;
                 }
                 current = current.next;
@@ -122,5 +124,38 @@ public class CarSetList implements CarSet {
             this.value = value;
             this.next = next;
         }
+    }
+
+    @Override
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+            int index = 0;
+            int nextElement = 0;
+            Entry iteratorElement;
+
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public Car next() {
+                Car car;
+                while (array[nextElement] == null){
+                    nextElement++;
+                }
+                if(iteratorElement == null) {
+                    iteratorElement = array[nextElement];
+                }
+                car = iteratorElement.value;
+                index++;
+                iteratorElement = iteratorElement.next;
+                if(iteratorElement == null){
+                    nextElement++;
+                }
+
+                return car;
+            }
+        };
     }
 }

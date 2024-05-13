@@ -1,6 +1,7 @@
 package collections_framework.array_list;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class CarArrayList implements ListCar{
     private Car[] array = new Car[10];
@@ -88,5 +89,21 @@ public class CarArrayList implements ListCar{
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    @Override
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+            int index = 0;
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public Car next() {
+                return array[index++];
+            }
+        };
     }
 }

@@ -2,7 +2,7 @@ package collections_framework.array_list;
 
 import java.util.Objects;
 
-public class Car {
+public class Car implements Comparable<Car>{
     private String brand;
     private int number;
 
@@ -21,6 +21,14 @@ public class Car {
     }
 
     @Override
+    public String toString() {
+        return "Car{" +
+                "brand='" + brand + '\'' +
+                ", number=" + number +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(brand, number);
     }
@@ -32,4 +40,8 @@ public class Car {
         return number;
     }
 
+    @Override
+    public int compareTo(Car o) {
+        return brand.compareTo(o.getBrand());
+    }
 }

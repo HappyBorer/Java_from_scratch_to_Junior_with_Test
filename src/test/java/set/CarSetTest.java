@@ -50,4 +50,12 @@ class CarSetTest {
         assertTrue(ArrayCarSet.contains(carOne));
         assertFalse(ArrayCarSet.contains(carTwo));
     }
+    @Test
+    void testForeach(){
+        int index = 0;
+        for(Car car : ArrayCarSet){
+            index++;
+        }
+        assertEquals(100, index);
+    }
 }

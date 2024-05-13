@@ -3,6 +3,8 @@ package linked_list;
 import collections_framework.array_list.Car;
 import collections_framework.array_list.ListCar;
 
+import java.util.Iterator;
+
 public class CarLinkedList implements ListCar {
     private Node first;
     private Node last;
@@ -123,5 +125,25 @@ public class CarLinkedList implements ListCar {
             this.value = value;
             this.next = next;
         }
+    }
+
+    @Override
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+
+            Node iteratorNode = first;
+
+            @Override
+            public boolean hasNext() {
+                return iteratorNode != null;
+            }
+
+            @Override
+            public Car next() {
+                Car car = iteratorNode.value;
+                iteratorNode = iteratorNode.next;
+                return car;
+            }
+        };
     }
 }

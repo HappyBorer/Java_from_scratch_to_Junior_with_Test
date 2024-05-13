@@ -2,6 +2,7 @@ package collections_framework;
 
 import collections_framework.array_list.Car;
 import collections_framework.array_list.CarArrayList;
+import collections_framework.array_list.CarCollection;
 import collections_framework.array_list.ListCar;
 import linked_list.CarLinkedList;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ListCarTest {
-    private ListCar arrayCar;
+    private CarLinkedList arrayCar;
     @BeforeEach
     void setUp() {
-        arrayCar = new CarArrayList();
+        arrayCar = new CarLinkedList();
         for(int i = 0; i < 100; i++){
             Car car = new Car("Brand" + i, i);
             arrayCar.add(car);
@@ -90,5 +91,14 @@ class ListCarTest {
         Car carTwo = new Car("BMW", 1);
         assertTrue(arrayCar.contains(carOne));
         assertFalse(arrayCar.contains(carTwo));
+    }
+
+    @Test
+    void testForeach(){
+        int index = 0;
+        for(Car car : arrayCar){
+            index++;
+        }
+        assertEquals(100, index);
     }
 }
